@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelectedProjectValue, useProjectsValue } from '../context';
+import { setSelectedProject } from '../Redux/action';
+import { setProjectActive } from '../Redux/action';
+import { useSelector,useDispatch } from 'react-redux';
 import { IndividualProject } from './IndividualProject';
 
-export const Projects = ({ activeValue = null }) => {
-  const [active, setActive] = useState(activeValue);
-  const { setSelectedProject } = useSelectedProjectValue();
-  const { projects } = useProjectsValue();
+export const Projects = () => {
+  const projects=useSelector(state=>state.projectsReducer.projects)
+  const active=useSelector(state=>state.projectsReducer.active)
+  const dispatch=useDispatch()
+ 
+
 
   return (
     projects &&
@@ -27,17 +31,17 @@ export const Projects = ({ activeValue = null }) => {
           tabIndex={0}
           aria-label={`Select ${project.name} as the task project`}
           onClick={() => {
-            setActive(project.projectId);
-            setSelectedProject(project.projectId);
+            dispatch(setProjectActive(project.projectId));
+            dispatch(setSelectedProject(project.projectId));
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              setActive(project.projectId);
-              setSelectedProject(project.projectId);
+              dispatch(setProjectActive(project.projectId));
+              dispatch(setSelectedProject(project.projectId));
             }
           }}
         >
-          <IndividualProject project={project} />
+          <IndividualProject  />
         </div>
       </li>
     ))

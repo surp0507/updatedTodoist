@@ -1,18 +1,23 @@
-/* eslint-disable no-nested-ternary */
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
 import moment from 'moment';
+import { useSelector,useDispatch } from 'react-redux';
+import { setProjects } from '../Redux/action';
+import { setTasks } from '../Redux/action';
+import { setArchivedTasks } from '../Redux/action';
 import { firebase } from '../firebase';
 import { collatedTasksExist } from '../helpers';
 
-export const useTasks = selectedProject => {
-  const [tasks, setTasks] = useState([]);
-  const [archivedTasks, setArchivedTasks] = useState([]);
+export const useTasks = () => {
+  const tasks=useSelector(state=>state.tasksReducer.tasks)
+  const selectedProject=useSelector(state=>state.projectsReducer.selectedProject)
+  const archivedTasks=useSelector(state=>state.tasksReducer.archivedTasks)
+  const dispatch=useDispatch()
 
   useEffect(() => {
     let unsubscribe = firebase
       .firestore()
       .collection('tasks')
-      .where('userId', '==', 'jlIFXIwyAL3tzHMtzRbw');
+      .where('userId', '==', 'vsJ71lgZ91nkxCwKciNo');
 
     unsubscribe =
       selectedProject && !collatedTasksExist(selectedProject)
@@ -33,7 +38,7 @@ export const useTasks = selectedProject => {
         ...task.data(),
       }));
 
-      setTasks(
+      dispatch(setTasks(
         selectedProject === 'NEXT_7'
           ? newTasks.filter(
               task =>
@@ -41,8 +46,8 @@ export const useTasks = selectedProject => {
                 task.archived !== true
             )
           : newTasks.filter(task => task.archived !== true)
-      );
-      setArchivedTasks(newTasks.filter(task => task.archived !== false));
+      ));
+     dispatch(setArchivedTasks(newTasks.filter(task => task.archived !== false)));
     });
 
     return () => unsubscribe();
@@ -52,13 +57,16 @@ export const useTasks = selectedProject => {
 };
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState([]);
+const projects=useSelector(state=>state.projectsReducer.projects)
+console.log(projects)
+const dispatch=useDispatch()
+
 
   useEffect(() => {
     firebase
       .firestore()
       .collection('projects')
-      .where('userId', '==', 'jlIFXIwyAL3tzHMtzRbw')
+      .where('userId', '==', 'GcGPs3obKErfFpDgkQR8')
       .orderBy('projectId')
       .get()
       .then(snapshot => {
@@ -68,7 +76,7 @@ export const useProjects = () => {
         }));
 
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-          setProjects(allProjects);
+          dispatch(setProjects(allProjects));
         }
       });
   }, [projects]);

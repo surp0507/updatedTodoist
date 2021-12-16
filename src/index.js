@@ -1,6 +1,16 @@
 import React from 'react';
-import { render } from 'react-dom';
+import  ReactDOM  from 'react-dom';
 import { App } from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
+import {Provider} from 'react-redux'
+import {store} from './Redux/store/index'
 
-render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+    <App/>
+    </Provider>
+   </React.StrictMode>,
+   document.getElementById('root')
+)

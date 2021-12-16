@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { firebase } from '../firebase';
+import { setProjects } from '../Redux/action';
 import { generatePushId } from '../helpers';
-import { useProjectsValue } from '../context';
+import { setShow } from '../Redux/action';
+import { setProjectName } from '../Redux/action';
+import { useSelector,useDispatch } from 'react-redux';
 
-export const AddProject = ({ shouldShow = false }) => {
-  const [show, setShow] = useState(shouldShow);
-  const [projectName, setProjectName] = useState('');
-
-  const projectId = generatePushId();
-  const { projects, setProjects } = useProjectsValue();
+export const AddProject = () => {
+   const projectId = generatePushId();
+const projects=useSelector(state=>state.projectsReducer.projects)
+const show=useSelector(state=>state.addProjectReducer.show)
+const projectName=useSelector(state=>state.addProjectReducer.projectName)
+const dispatch=useDispatch()
 
   const addProject = () =>
     projectName &&
@@ -19,12 +22,12 @@ export const AddProject = ({ shouldShow = false }) => {
       .add({
         projectId,
         name: projectName,
-        userId: 'jlIFXIwyAL3tzHMtzRbw',
+        userId:'GcGPs3obKErfFpDgkQR8',
       })
       .then(() => {
-        setProjects([...projects]);
-        setProjectName('');
-        setShow(false);
+        dispatch(setProjects([...projects]));
+        dispatch(setProjectName(''));
+        dispatch(setShow(false));
       });
 
   return (
@@ -33,7 +36,7 @@ export const AddProject = ({ shouldShow = false }) => {
         <div className="add-project__input" data-testid="add-project-inner">
           <input
             value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
+            onChange={(e) => dispatch(setProjectName(e.target.value))}
             className="add-project__name"
             data-testid="project-name"
             type="text"
@@ -51,9 +54,9 @@ export const AddProject = ({ shouldShow = false }) => {
             aria-label="Cancel adding project"
             data-testid="hide-project-overlay"
             className="add-project__cancel"
-            onClick={() => setShow(false)}
+            onClick={() => dispatch(setShow(false))}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') setShow(false);
+              if (e.key === 'Enter') dispatch(setShow(false));
             }}
             role="button"
             tabIndex={0}
@@ -67,9 +70,9 @@ export const AddProject = ({ shouldShow = false }) => {
         aria-label="Add Project"
         data-testid="add-project-action"
         className="add-project__text"
-        onClick={() => setShow(!show)}
+        onClick={() => dispatch(setShow(!show))}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') setShow(!show);
+          if (e.key === 'Enter') dispatch(setShow(!show));
         }}
         role="button"
         tabIndex={0}

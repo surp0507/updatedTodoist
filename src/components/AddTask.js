@@ -42,8 +42,8 @@ export const AddTask = ({
           archived: false,
           projectId,
           task,
-          date: collatedDate || taskDate,
-          userId: 'jlIFXIwyAL3tzHMtzRbw',
+          date: collatedDate || taskDate,            
+          userId: 'vsJ71lgZ91nkxCwKciNo',
         })
         .then(() => {
           setTask('');
@@ -187,9 +187,3 @@ export const AddTask = ({
   );
 };
 
-AddTask.propTypes = {
-  showAddTaskMain: PropTypes.bool,
-  shouldShowMain: PropTypes.bool,
-  showQuickAddTask: PropTypes.bool,
-  setShowQuickAddTask: PropTypes.func,
-};

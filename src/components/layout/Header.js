@@ -42,12 +42,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
         </div>
       </nav>
 
-      <AddTask
-        showAddTaskMain={false}
-        shouldShowMain={shouldShowMain}
-        showQuickAddTask={showQuickAddTask}
-        setShowQuickAddTask={setShowQuickAddTask}
-      />
+      <AddTask/>
     </header>
   );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useProjectsValue } from '../context';
+import { useSelector } from 'react-redux';
 
 export const ProjectOverlay = ({
   setProject,
   showProjectOverlay,
   setShowProjectOverlay,
 }) => {
-  const { projects } = useProjectsValue();
+const projects=useSelector(state=>state.projectsReducer.projects)
 
   return (
     projects &&

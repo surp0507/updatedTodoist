@@ -2,15 +2,14 @@ import React, { useEffect } from 'react';
 import { Checkbox } from './Checkbox';
 import { AddTask } from './AddTask';
 import { useTasks } from '../hooks';
+import { useSelector } from 'react-redux';
 import { collatedTasks } from '../constants';
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../helpers';
-import { useSelectedProjectValue, useProjectsValue } from '../context';
 
 export const Tasks = () => {
-  const { selectedProject } = useSelectedProjectValue();
-  const { projects } = useProjectsValue();
-  const { tasks } = useTasks(selectedProject);
-
+   const { tasks } = useTasks();
+   const selectedProject=useSelector(state=>state.projectsReducer.selectedProject)
+   const projects=useSelector(state=>state.projectsReducer.projects)
   let projectName = '';
 
   if (collatedTasksExist(selectedProject) && selectedProject) {
