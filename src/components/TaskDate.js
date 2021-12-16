@@ -1,22 +1,26 @@
 import React from 'react';
 import moment from 'moment';
+import { setTaskDate,setShowTaskDate } from '../Redux/action';
 import { FaSpaceShuttle, FaSun, FaRegPaperPlane } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
+export const TaskDate = () =>{
+
+  const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate)
+
   showTaskDate && (
     <div className="task-date" data-testid="task-date-overlay">
       <ul className="task-date__list">
         <li>
           <div
             onClick={() => {
-              setShowTaskDate(false);
-              setTaskDate(moment().format('DD/MM/YYYY'));
+              dispatch(setShowTaskDate(false));
+              dispatch(setTaskDate(moment().format('DD/MM/YYYY')));
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setShowTaskDate(false);
-                setTaskDate(moment().format('DD/MM/YYYY'));
+                dispatch(setShowTaskDate(false));
+                dispatch(setTaskDate(moment().format('DD/MM/YYYY')));
               }
             }}
             data-testid="task-date-today"
@@ -33,13 +37,13 @@ export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
         <li>
           <div
             onClick={() => {
-              setShowTaskDate(false);
-              setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'));
+              dispatch(setShowTaskDate(false));
+              dispatch(setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY')));
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setShowTaskDate(false);
-                setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'));
+                dispatch(setShowTaskDate(false));
+                dispatch(setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY')));
               }
             }}
             data-testid="task-date-tomorrow"
@@ -56,13 +60,13 @@ export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
         <li>
           <div
             onClick={() => {
-              setShowTaskDate(false);
-              setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'));
+              dispatch(setShowTaskDate(false));
+              dispatch(setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY')));
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setShowTaskDate(false);
-                setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'));
+                dispatch(setShowTaskDate(false));
+                dispatch(setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY')));
               }
             }}
             data-testid="task-date-next-week"
@@ -79,9 +83,5 @@ export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
       </ul>
     </div>
   );
+}
 
-TaskDate.propTypes = {
-  setTaskDate: PropTypes.func.isRequired,
-  showTaskDate: PropTypes.bool.isRequired,
-  setShowTaskDate: PropTypes.func.isRequired,
-};

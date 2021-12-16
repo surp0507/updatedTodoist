@@ -14,6 +14,8 @@ import { SET_TASK_DATE } from "../constants";
 import { SET_PROJECT } from "../constants";
 import { SET_SHOW_MAIN } from "../constants";
 import { SET_SHOW_TASK_DATE } from "../constants";
+import { SET_SHOULD_SHOW_MAIN } from "../constants";
+import { SHOW_QUICK_ADD_TASK } from "../constants";
 
 export const setTasks=(payload)=>{
   return{
@@ -125,6 +127,20 @@ export const setShowMain=(payload)=>{
 export const setShowTaskDate=(payload)=>{
   return{
     type:SET_SHOW_TASK_DATE,
+    payload
+  }
+}
+
+export const setShouldShowMain=(payload)=>{
+  return{
+    type:SET_SHOULD_SHOW_MAIN,
+    payload
+  }
+}
+
+export const setQuickAddTask=(payload)=>{
+  return{
+    type:SHOW_QUICK_ADD_TASK,
     payload
   }
 }
