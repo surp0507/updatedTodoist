@@ -15,7 +15,7 @@ const initialState={
   showTaskDate:false
 }
 
-export const addTaskReducer=(state,action)=>{
+export const addTaskReducer=(state=initialState,action)=>{
   switch(action.type)
   {
     case SET_TASK:return{
@@ -42,5 +42,6 @@ export const addTaskReducer=(state,action)=>{
       ...state,
       showTaskDate:action.payload
     }
+    default:return state;
   }
 }

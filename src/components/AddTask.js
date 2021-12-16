@@ -6,7 +6,7 @@ import { firebase } from '../firebase';
 import { ProjectOverlay } from './ProjectOverlay';
 import { setShowProjectOverlay,setShowTaskDate } from '../Redux/action';
 import { TaskDate } from './TaskDate';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
 
 export const AddTask = () => {
   
@@ -20,7 +20,7 @@ export const AddTask = () => {
   const showMain=useSelector(state=>state.addTaskReducer.showMain)
   const showProjectOverlay=useSelector(state=>state.addTaskReducer.showProjectOverlay)
   const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate)
-  const dispatch=useDispatch(state=>state.addTaskReducer)
+  const dispatch=useDispatch();
 
   const addTask = () => {
     const projectId = project || selectedProject;
