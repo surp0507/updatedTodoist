@@ -18,7 +18,6 @@ import { SET_SHOULD_SHOW_MAIN } from "../constants";
 import { SHOW_QUICK_ADD_TASK } from "../constants";
 
 export const setTasks=(payload)=>{
-
   return{
     type:SET_TASKS,
     payload
