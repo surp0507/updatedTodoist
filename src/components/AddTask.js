@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import moment from 'moment';
-import {setShowQuickAddTask,setTask ,setTaskDate,setProject,setShowMain} from '../Redux/action'
+import {setTask ,setProject,setShowMain} from '../Redux/action'
 import { firebase } from '../firebase';
 import { ProjectOverlay } from './ProjectOverlay';
 import { setShowProjectOverlay,setShowTaskDate } from '../Redux/action';
+import {setShowQuickAddTask} from '../Redux/action'
 import { TaskDate } from './TaskDate';
 import { useSelector,useDispatch} from 'react-redux';
 
 export const AddTask = () => {
   
-  const shouldShowMain=useSelector(state=>state.headerReducer.shouldShowMain)
-  const showQuickAddTask=useSelector(state=>state.headerReducer.showQuickAddTask)
-  const showAddTaskMain=useSelector(state=>state.headerReducer.showAddTaskMain)
-  const selectedProject = useSelector(state=>state.projectsReducer.selectedProject)
-  const task=useSelector(state=>state.addTaskReducer.task)
-  const project=useSelector(state=>state.addTaskReducer.project)
-  const taskDate=useSelector(state=>state.addTaskReducer.taskDate)
-  const showMain=useSelector(state=>state.addTaskReducer.showMain)
-  const showProjectOverlay=useSelector(state=>state.addTaskReducer.showProjectOverlay)
-  const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate)
+  const shouldShowMain=useSelector(state=>state.headerReducer.shouldShowMain);
+  const showQuickAddTask=useSelector(state=>state.headerReducer.showQuickAddTask);
+  const showAddTaskMain=useSelector(state=>state.headerReducer.showAddTaskMain);
+  const selectedProject = useSelector(state=>state.projectsReducer.selectedProject);
+  const task=useSelector(state=>state.addTaskReducer.task);
+  const project=useSelector(state=>state.addTaskReducer.project);
+  const taskDate=useSelector(state=>state.addTaskReducer.taskDate);
+  const showMain=useSelector(state=>state.addTaskReducer.showMain);
+  const showProjectOverlay=useSelector(state=>state.addTaskReducer.showProjectOverlay);
+  const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate);
   const dispatch=useDispatch();
 
   const addTask = () => {

@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
 import { setSelectedProject } from '../Redux/action';
 import { setProjectActive } from '../Redux/action';
 import { useSelector,useDispatch } from 'react-redux';
 import { IndividualProject } from './IndividualProject';
+import {firebase} from '../firebase'
+import { setProjects } from '../Redux/action';
+import { useEffect } from 'react';
+
 
 export const Projects = () => {
   const projects=useSelector(state=>state.projectsReducer.projects)
   const active=useSelector(state=>state.projectsReducer.active)
   const dispatch=useDispatch()
  
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('projects')
+      .where('userId', '==', 'GcGPs3obKErfFpDgkQR8')
+      .orderBy('projectId')
+      .get()
+      .then(snapshot => {
+        const allProjects = snapshot.docs.map(project => ({
+          ...project.data(),
+          docId: project.id,
+        }));
+
+        if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
+          dispatch(setProjects(allProjects));
+        }
+      });
+  }, [projects]);
+
 
 
   return (
@@ -41,13 +63,9 @@ export const Projects = () => {
             }
           }}
         >
-          <IndividualProject  />
+          <IndividualProject project={project} />
         </div>
       </li>
     ))
   );
-};
-
-Projects.propTypes = {
-  activeValue: PropTypes.bool,
 };

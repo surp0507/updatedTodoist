@@ -8,7 +8,7 @@ import { setShowModal } from '../Redux/action';
 import {useSelector,useDispatch} from 'react-redux'
 import { firebase } from '../firebase';
 
-export const IndividualProject = () => {
+export const IndividualProject = ({project}) => {
   
 const projects=useSelector(state=>state.projectsReducer.projects)
 const show=useSelector(state=>state.projectsReducer.show)
@@ -32,14 +32,8 @@ const dispatch=useDispatch()
   return (
     <>
       <span className="sidebar__dot">•</span>
-      {projects.map(project=>(
-        <li key={project.id}>
-          <span  className="sidebar__project-name">{project.name}</span>
-        </li>
-         
-      ))}
-     
-      <span>
+      <span  className="sidebar__project-name">{project.name}</span>
+       <span>
          <FaTrashAlt onClick={handleShow}/>
       </span>
 

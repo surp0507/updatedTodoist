@@ -8,7 +8,9 @@ export const TaskDate = () =>{
 
   const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate)
 
-  showTaskDate && (
+  return (
+    <>
+    {showTaskDate && 
     <div className="task-date" data-testid="task-date-overlay">
       <ul className="task-date__list">
         <li>
@@ -82,6 +84,8 @@ export const TaskDate = () =>{
         </li>
       </ul>
     </div>
+  }
+</>
   );
 }
 

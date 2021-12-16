@@ -8,8 +8,8 @@ export const App = ({ darkModeDefault = false }) => {
   const [darkMode, setDarkMode] = useState(darkModeDefault);
 
   return (
-    <SelectedProjectProvider>
-      <ProjectsProvider>
+  
+
         <main
           data-testid="application"
           className={darkMode ? 'darkmode' : undefined}
@@ -17,8 +17,8 @@ export const App = ({ darkModeDefault = false }) => {
           <Header darkMode={darkMode} setDarkMode={setDarkMode} />
           <Content />
         </main>
-      </ProjectsProvider>
-    </SelectedProjectProvider>
+    
+  
   );
 };
 
