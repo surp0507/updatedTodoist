@@ -2,11 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import { setTaskDate,setShowTaskDate } from '../Redux/action';
 import { FaSpaceShuttle, FaSun, FaRegPaperPlane } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 
 export const TaskDate = () =>{
 
   const showTaskDate=useSelector(state=>state.addTaskReducer.showTaskDate)
+  const dispatch=useDispatch()
 
   return (
     <>

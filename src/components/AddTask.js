@@ -155,7 +155,9 @@ export const AddTask = () => {
             data-testid="show-project-overlay"
             onClick={() => dispatch(setShowProjectOverlay(!showProjectOverlay))}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') dispatch(setShowProjectOverlay(!showProjectOverlay));
+              if (e.key === 'Enter'){
+                 dispatch(setShowProjectOverlay(!showProjectOverlay))
+              };
             }}
             tabIndex={0}
             role="button"
@@ -167,7 +169,10 @@ export const AddTask = () => {
             data-testid="show-task-date-overlay"
             onClick={() => dispatch(setShowTaskDate(!showTaskDate))}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') dispatch(setShowTaskDate(!showTaskDate));
+              debugger
+              if (e.key === 'Enter'){
+                 dispatch(setShowTaskDate(!showTaskDate));
+              }
             }}
             tabIndex={0}
             role="button"

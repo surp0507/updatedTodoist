@@ -14,6 +14,7 @@ import { AddProject } from '../AddProject';
 
 export const Sidebar = () => {
   const active=useSelector(state=>state.sidebarReducer.active)
+   console.log(active)
   const showProjects=useSelector(state=>state.sidebarReducer.showProjects)
   const dispatch=useDispatch()
 

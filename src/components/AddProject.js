@@ -8,11 +8,11 @@ import { setProjectName } from '../Redux/action';
 import { useSelector,useDispatch } from 'react-redux';
 
 export const AddProject = () => {
-   const projectId = generatePushId();
-const projects=useSelector(state=>state.projectsReducer.projects)
-const show=useSelector(state=>state.addProjectReducer.show)
-const projectName=useSelector(state=>state.addProjectReducer.projectName)
-const dispatch=useDispatch()
+  const projectId = generatePushId();
+  const projects=useSelector(state=>state.projectsReducer.projects)
+  const show=useSelector(state=>state.addProjectReducer.show)
+  const projectName=useSelector(state=>state.addProjectReducer.projectName)
+  const dispatch=useDispatch()
 
   const addProject = () =>
     projectName &&
@@ -30,13 +30,17 @@ const dispatch=useDispatch()
         dispatch(setShow(false));
       });
 
+      const handleChange=(e)=>{
+        dispatch(setProjectName(e.target.vaue))
+      }
+
   return (
     <div className="add-project" data-testid="add-project">
-      {show && (
+      { (
         <div className="add-project__input" data-testid="add-project-inner">
           <input
             value={projectName}
-            onChange={(e) => dispatch(setProjectName(e.target.value))}
+            onChange={handleChange}
             className="add-project__name"
             data-testid="project-name"
             type="text"
