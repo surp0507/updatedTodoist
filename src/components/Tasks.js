@@ -10,6 +10,7 @@ import { setArchivedTasks } from '../Redux/action';
 
 export const Tasks = () => {
   const tasks=useSelector(state=>state.tasksReducer.tasks)
+  console.log("this is tasks",tasks)
    const selectedProject=useSelector(state=>state.projectsReducer.selectedProject)
    const projects=useSelector(state=>state.projectsReducer.projects)
    const dispatch=useDispatch()
@@ -69,7 +70,7 @@ export const Tasks = () => {
     });
 
     return () => unsubscribe();
-  }, [selectedProject]);
+  }, []);
 
 
 
